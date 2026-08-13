@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vaultly — Admin Approval Panel</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --card: #1a1d24;
+    --border: #2a2e38;
+    --text: #e8e9ec;
+    --muted: #9aa0ab;
+    --accent: #6c8dff;
+    --green: #33c47a;
+    --red: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 32px 16px;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; }
+  p.sub { color: var(--muted); margin-top: 0; margin-bottom: 24px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .user-info .username { font-weight: 600; font-size: 16px; }
+  .user-info .meta { color: var(--muted); font-size: 13px; }
+  .actions button {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  .approve-btn { background: var(--green); color: #06210f; }
+  .reject-btn { background: var(--red); color: #2a0808; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  #loginGate {
+    max-width: 360px;
+    margin: 80px auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px;
+    border-radius: 10px;
+  }
+  #loginGate input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #11141a;
+    color: var(--text);
+  }
+  #loginGate button {
+    width: 100%;
+    padding: 10px;
+    background: var(--accent);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #errorMsg { color: var(--red); font-size: 13px; min-height: 18px; }
+</style>
+</head>
+<body>
+
+  <div id="loginGate">
+    <h2>Admin Login</h2>
+    <p class="sub" style="margin-bottom:16px;">Sirf admin account is panel ko access kar sakta hai.</p>
+    <input id="adminUsername" placeholder="Admin username" />
+    <input id="adminPassword" type="password" placeholder="Password" />
+    <div id="errorMsg"></div>
+    <button id="adminLoginBtn">Login</button>
+  </div>
+
+  <div id="panelWrap" style="display:none; max-width: 700px; margin: 0 auto;">
+    <h1>Pending Vault Requests</h1>
+    <p class="sub">Naye users yaha dikhenge jab tak unhe approve ya reject nahi karte.</p>
+    <div id="userList"></div>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

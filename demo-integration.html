@@ -1,0 +1,62 @@
+<!--
+  ============================================================
+  Ye sirf DEMO hai ki auth.js ko apne existing Vaultly
+  signup/login forms ke saath kaise jodna hai.
+  Apne asli index.html ke <script type="module"> me
+  yehi logic paste kar do.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vaultly - Integration Demo</title>
+</head>
+<body>
+
+  <div id="pendingScreen" style="display:none;">
+    <h2>⏳ Approval Pending</h2>
+    <p>Aapka vault admin approval ka intezaar kar raha hai. Thodi der baad dobara try karo.</p>
+  </div>
+
+  <div id="rejectedScreen" style="display:none;">
+    <h2>❌ Request Rejected</h2>
+    <p>Aapka vault request reject ho chuka hai. Admin se contact karo.</p>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <h2>✅ Welcome to your Vault</h2>
+    <!-- yaha asli Vaultly dashboard load hoga -->
+  </div>
+
+  <script type="module">
+    import { createVault, unlockVault } from "./auth.js";
+
+    // ---- Example: signup form submit handler ----
+    // document.getElementById("createVaultBtn").addEventListener("click", async () => {
+    //   const username = document.getElementById("newUsername").value;
+    //   const password = document.getElementById("newPassword").value;
+    //   const result = await createVault(username, password);
+    //   alert(result.message);
+    // });
+
+    // ---- Example: login form submit handler ----
+    // document.getElementById("unlockBtn").addEventListener("click", async () => {
+    //   const username = document.getElementById("loginUsername").value;
+    //   const password = document.getElementById("loginPassword").value;
+    //   try {
+    //     const result = await unlockVault(username, password);
+    //     if (result.approved) {
+    //       document.getElementById("dashboard").style.display = "block";
+    //     } else if (result.status === "pending") {
+    //       document.getElementById("pendingScreen").style.display = "block";
+    //     } else {
+    //       document.getElementById("rejectedScreen").style.display = "block";
+    //     }
+    //   } catch (err) {
+    //     alert(err.message);
+    //   }
+    // });
+  </script>
+</body>
+</html>

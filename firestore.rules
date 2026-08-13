@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      // Koi bhi logged-in user apna record padh sakta hai (status check ke liye)
+      allow read: if request.auth != null;
+
+      // Naya user sirf apna document bana sakta hai, status hamesha "pending" se shuru
+      allow create: if request.auth != null
+                    && request.auth.uid == userId
+                    && request.resource.data.status == "pending"
+                    && request.resource.data.role == "user";
+
+      // Update sirf admin kar sakta hai (approve/reject)
+      // Normal user apna status field khud change NAHI kar sakta
+      allow update: if request.auth != null
+                    && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+
+      allow delete: if false;
+    }
+
+    // Baaki collections (files, folders, notes, etc.) yaha apne existing rules rakho
+    // Example: sirf approved users hi apna data access kar sakte hain
+    // match /files/{fileId} {
+    //   allow read, write: if request.auth != null
+    //     && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved";
+    // }
+  }
+}
